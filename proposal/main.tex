@@ -1,0 +1,94 @@
+% imports and packages and stuff
+% add or remove these as necessary
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage[shortlabels]{enumitem}
+\usepackage[parfill]{parskip}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+
+% bibliography package
+\usepackage{csquotes}
+\usepackage[style=ieee]{biblatex}
+\addbibresource{references.bib}
+
+% appendix package
+\usepackage[title, titletoc]{appendix}
+
+% font
+\usepackage{palatino}
+
+% make urls styled not weirdly
+\urlstyle{same}
+
+% change the spacing of tables to be reasonable
+\renewcommand{\arraystretch}{1.5}
+
+% start of the document
+\begin{document}
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.1mm}} 
+\center % Center everything on the page
+ 
+%---------------------------------------------------------------------------------
+%	HEADING SECTION
+%---------------------------------------------------------------------------------
+\textsc{\Large ECE 445}\\[0.5cm] % heading course Number
+\textsc{\large Senior Design Laboratory}\\[0.5cm] % heading course name
+\textsc{\Large PROJECT PROPOSAL }\\[0.5cm] % Minor heading
+%---------------------------------------------------------------------------------
+%	TITLE SECTION
+%---------------------------------------------------------------------------------
+
+\HRule \\[0.5cm]
+\huge \textbf{Robot for Gym Exercise Guidance} % Title
+\HRule \\[2cm]
+ 
+%---------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%---------------------------------------------------------------------------------
+\begin{minipage}{0.5\textwidth}
+    \begin{center} \large
+        \underline{\textbf{Team \#19}} \\ \medskip
+        \textsc{Dalei Jiang} (daleij2@illinois.edu) \\
+        \textsc{Zifei Han} (zifeih2@illinois.edu) \\
+        \textsc{Chang Liu} (changl12@illinois.edu) \\
+        \textsc{Kunle Li} (kunleli2@illinois.edu) \\
+    \end{center}
+\end{minipage} \\[1.5cm]
+
+\begin{minipage}{0.5\textwidth}
+    \begin{center}
+        \large
+        \underline{TA}: Yiqun Niu
+    \end{center}
+\end{minipage} \\[1cm]
+
+{\large March 10, 2023} % Date
+
+\vfill % Fill the rest of the page with white-space
+
+\end{titlepage}
+\clearpage
+\tableofcontents
+% \listoffigures % putting these here in case we need them later
+% \listoftables
+\newpage
+
+% Below starts all the sections in their own individual files in the sections folder
+\pagenumbering{arabic}
+
+\clearpage
+\section{Introduction}
+\input{sections/introduction.tex} % Copy the above 3 lines to add another section
+\section{Design}
+\input{sections/design.tex} % Copy the above 3 lines to add another section
+\section{Ethics and Safety}
+\input{sections/ethics and safety.tex} % Copy the above 3 lines to add another section
+
+\clearpage
+\end{document}
