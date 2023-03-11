@@ -7,3 +7,5 @@
 *.xml
 *.toc
 *.bcf
+*.blg
+*.bbl
