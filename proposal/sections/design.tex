@@ -21,3 +21,7 @@
 \subsubsection{Man-machine interactive system}
 
 \subsection{Tolerance Analysis}
+Achieving success in our project depends on the continuity of camera-captured photos as the inputs to our model. However, unlike some of the dataset collected by surveillance camera, which is super steady, there might be vibrations in our camera input. Besides, in real-life scenarios, the road may not always be super flat, leading to non-continuous images with significant gaps in a short period. Such unstable images present a challenge when stitching them together to form the whole picture. Misalignment of the same lines in these images can result in distortions, leading to a poorly reconstructed image that is twisted and of low quality.
+Another potential problem is how can we deal with the case where there are more than one people in the image. Our model should be able to identify the user we have been tracking and ignore others while not hitting them.
+
+Our tracking system should be able to handle those challenges, we will design an algorithm to stabilize the image and provide steady inputs to model, and as for the multiple people case, I think one possible approach is to train our model with test cases with several people. After correctly labeling the people in sight, we could try track our user by putting him in the center of sight.
