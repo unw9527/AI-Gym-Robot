@@ -37,3 +37,8 @@ Achieving success in our project depends on the continuity of camera-captured ph
 Another potential problem is how can we deal with the case where there are more than one people in the image. Our model should be able to identify the user we have been tracking and ignore others while not hitting them.
 
 Our tracking system should be able to handle those challenges, we will design an algorithm to stabilize the image and provide steady inputs to model, and as for the multiple people case, we think one possible approach is to train our model with test cases with several people. After correctly labeling the people in sight, we could try track our user by putting him in the center of sight.
+
+Besides, During the recognition and analysis of human body movements, occasional errors in key point recognition may occur, potentially affecting the accuracy of movement analysis. In such cases, it is essential that the Mask R-CNN algorithm is robust enough to handle missing or inaccurately detected key points effectively. One possible solution is to incorporate data augmentation techniques during the training of the Mask R-CNN model, such as rotation, scaling, or flipping, to improve its generalization capabilities and tolerance to variations in human body movements. Another possible approach is to leverage ensemble learning techniques, such as stacking multiple models or using model averaging, to improve key point recognition accuracy and robustness.\\
+The tolerance limits we set for the object tracking algorithm is:\\
+1.	Mask R-CNN accuracy: Minimum 95\% accuracy in key point recognition.\\
+2.	Positioning accuracy: ±0.2 meters from the desired 2-meter distance.
