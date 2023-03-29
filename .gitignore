@@ -9,4 +9,5 @@
 *.bcf
 *.blg
 *.bbl
-*/video/*
+*/videos/*
+*__pycache__
