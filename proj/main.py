@@ -1,4 +1,3 @@
-## import packages
 import cv2
 import argparse
 from utils import *
@@ -40,7 +39,6 @@ with mp_pose.Pose(min_detection_confidence=0.5,
     status = True  # state of move
     while cap.isOpened():
         ret, frame = cap.read()
-        # result_screen = np.zeros((250, 400, 3), np.uint8)
 
         frame = cv2.resize(frame, (800, 480), interpolation=cv2.INTER_AREA)
         ## recolor frame to RGB
@@ -60,13 +58,13 @@ with mp_pose.Pose(min_detection_confidence=0.5,
             pass
 
         # score_table(args["exercise_type"], counter, status)
-        cv2.putText(frame, "Activity : " + args["exercise_type"].replace("-", " "),
+        cv2.putText(frame, "Activity: " + args["exercise_type"].replace("-", " "),
                 (10, 65), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (182, 158, 128), 2,
                 cv2.LINE_AA)
-        cv2.putText(frame, "Counter : " + str(counter), (10, 100),
+        cv2.putText(frame, "Counter: " + str(counter), (10, 100),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (182, 158, 128), 2, cv2.LINE_AA)
-        cv2.putText(frame, "Status : " + str(status), (10, 135),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (182, 158, 128), 2, cv2.LINE_AA)
+        # cv2.putText(frame, "Status: " + str(status), (10, 135),
+                    # cv2.FONT_HERSHEY_SIMPLEX, 0.7, (182, 158, 128), 2, cv2.LINE_AA)
 
         ## render detections (for landmarks)
         mp_drawing.draw_landmarks(

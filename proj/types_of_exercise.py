@@ -8,34 +8,25 @@ class TypeOfExercise(BodyPartAngle):
         super().__init__(landmarks)
 
     def push_up(self, counter, status):
-        left_shoulder = detection_body_part(self.landmarks, "LEFT_SHOULDER") # 11
-        left_elbow = detection_body_part(self.landmarks, "LEFT_ELBOW") # 13
-        left_wrist = detection_body_part(self.landmarks, "LEFT_WRIST") # 15
-        left_hip = detection_body_part(self.landmarks, "LEFT_HIP") # 23
-        left_knee = detection_body_part(self.landmarks, "LEFT_KNEE") # 25
-        
-        elbow_angle = calculate_angle(left_shoulder, left_elbow, left_wrist)
-        shoulder_angle = calculate_angle(left_elbow, left_shoulder, left_hip)
-        hip_angle = calculate_angle(left_shoulder, left_hip, left_knee)
+        elbow_angle = self.angle_of_elbow()
+        shoulder_angle = self.angle_of_shoulder()
+        hip_angle = self.angle_of_hip()
         
         # Percentage of success of pushup
         per = np.interp(elbow_angle, (90, 160), (0, 100))
         
         # Check to ensure right form before starting the program
         print(elbow_angle, shoulder_angle, hip_angle, counter, per)
-            
         if per == 0:
             if elbow_angle <= 90 and hip_angle > 160:
                 if not status:
                     counter += 0.5
                     status = True
-                
         elif per == 100:
             if elbow_angle > 160 and shoulder_angle > 40 and hip_angle > 160:
                 if status:
                     counter += 0.5
                     status = False
-
         return [counter, status]
 
     def pull_up(self, counter, status):
@@ -54,11 +45,7 @@ class TypeOfExercise(BodyPartAngle):
         return [counter, status]
 
     def squat(self, counter, status):
-        hip = detection_body_part(self.landmarks, "LEFT_HIP")
-        knee = detection_body_part(self.landmarks, "LEFT_KNEE")
-        ankle = detection_body_part(self.landmarks, "LEFT_ANKLE")
-        
-        knee_angle = calculate_angle(hip, knee, ankle)
+        knee_angle = self.angle_of_knee()
         
         if knee_angle > 169:
             status = "UP"
