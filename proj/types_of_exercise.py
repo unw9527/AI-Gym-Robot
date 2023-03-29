@@ -16,7 +16,7 @@ class TypeOfExercise(BodyPartAngle):
         per = np.interp(elbow_angle, (90, 160), (0, 100))
         
         # Check to ensure right form before starting the program
-        print(elbow_angle, shoulder_angle, hip_angle, counter, per)
+        # print(elbow_angle, shoulder_angle, hip_angle, counter, per)
         if per == 0:
             if elbow_angle <= 90 and hip_angle > 160:
                 if not status:
@@ -48,10 +48,10 @@ class TypeOfExercise(BodyPartAngle):
         knee_angle = self.angle_of_knee()
         
         if knee_angle > 169:
-            status = "UP"
-        if knee_angle <= 110 and status =='UP': # the knee angle is fine-tuned
-            status="DOWN"
-            counter +=1
+            status = False
+        if knee_angle <= 110 and status == False: # the knee angle is fine-tuned
+            status = True
+            counter += 1
         return [counter, status]
 
     def walk(self, counter, status):
