@@ -1,3 +1,34 @@
+#################################################################################
+#
+# tab:4
+#
+# main.py: main function for all pose-recognition
+#
+#
+# Permission to use, copy, modify, and distribute this software and its
+# documentation for any purpose, without fee, and without written agreement is
+# hereby granted, provided that the above copyright notice and the following
+# two paragraphs appear in all copies of this software.
+#
+# IN NO EVENT SHALL THE AUTHOR OR THE UNIVERSITY OF ILLINOIS BE LIABLE TO 
+# ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL 
+# DAMAGES ARISING OUT  OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, 
+# EVEN IF THE AUTHOR AND/OR THE UNIVERSITY OF ILLINOIS HAS BEEN ADVISED 
+# OF THE POSSIBILITY OF SUCH DAMAGE.
+# 
+# THE AUTHOR AND THE UNIVERSITY OF ILLINOIS SPECIFICALLY DISCLAIM ANY 
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE 
+# PROVIDED HEREUNDER IS ON AN "AS IS" BASIS, AND NEITHER THE AUTHOR NOR
+# THE UNIVERSITY OF ILLINOIS HAS ANY OBLIGATION TO PROVIDE MAINTENANCE, 
+# SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS."
+#
+# Author:          Kunle Li
+# Creation Date:   2023-03-29
+# Credits:         https://github.com/M-A-D-A-R-A/Sports_py
+#
+#################################################################################
+
 import cv2
 import argparse
 from utils import *
@@ -57,14 +88,19 @@ with mp_pose.Pose(min_detection_confidence=0.5,
         except:
             pass
 
-        # score_table(args["exercise_type"], counter, status)
+        # Create white rectangle at top left of image
+        cv2.rectangle(frame, (0, 0), (200, 40), (255, 255, 255), cv2.FILLED)
+
+        # Add text on top of white rectangle
         cv2.putText(frame, "Activity: " + args["exercise_type"].replace("-", " "),
-                (10, 65), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (182, 158, 128), 2,
-                cv2.LINE_AA)
-        cv2.putText(frame, "Counter: " + str(counter), (10, 100),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (182, 158, 128), 2, cv2.LINE_AA)
-        # cv2.putText(frame, "Status: " + str(status), (10, 135),
-                    # cv2.FONT_HERSHEY_SIMPLEX, 0.7, (182, 158, 128), 2, cv2.LINE_AA)
+                    (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2, cv2.LINE_AA)
+        
+        # Create white rectangle at bottom left of image
+        cv2.rectangle(frame, (0, 350), (80, 480), (255, 255, 255), cv2.FILLED)
+        
+        # Add text on top of white rectangle
+        cv2.putText(frame, str(counter), (10, 450),
+                    cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 3, cv2.LINE_AA)
 
         ## render detections (for landmarks)
         mp_drawing.draw_landmarks(

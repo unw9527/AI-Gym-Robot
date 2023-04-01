@@ -20,12 +20,11 @@ class TypeOfExercise(BodyPartAngle):
         if per == 0:
             if elbow_angle <= 90 and hip_angle > 160:
                 if not status:
-                    counter += 0.5
+                    counter += 1
                     status = True
         elif per == 100:
             if elbow_angle > 160 and shoulder_angle > 40 and hip_angle > 160:
                 if status:
-                    counter += 0.5
                     status = False
         return [counter, status]
 
