@@ -1,12 +1,11 @@
 import mediapipe as mp
 import pandas as pd
 import numpy as np
-import cv2
 
 mp_pose = mp.solutions.pose
 
 
-# returns an angle value as a result of the given points
+# Return an angle value as a result of the given points
 def calculate_angle(a, b, c):
     a = np.array(a)  # First
     b = np.array(b)  # Mid
@@ -16,7 +15,7 @@ def calculate_angle(a, b, c):
               np.arctan2(a[1] - b[1], a[0] - b[0])
     angle = np.abs(radians * 180.0 / np.pi)
 
-    # check cord sys area
+    # Check cord sys area
     # if angle > 180.0:
     #     angle = 360 - angle
     if angle < 0:
@@ -29,7 +28,7 @@ def calculate_angle(a, b, c):
     return angle
 
 
-# return body part x,y value
+# Return body part x,y value
 def detection_body_part(landmarks, body_part_name):
     return [
         landmarks[mp_pose.PoseLandmark[body_part_name].value].x,
@@ -38,7 +37,7 @@ def detection_body_part(landmarks, body_part_name):
     ]
 
 
-# return body_part, x, y as dataframe
+# Return body_part, x, y as dataframe
 def detection_body_parts(landmarks):
     body_parts = pd.DataFrame(columns=["body_part", "x", "y"])
 
