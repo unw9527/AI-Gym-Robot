@@ -35,8 +35,14 @@ from utils import *
 import mediapipe as mp
 from types_of_exercise import TypeOfExercise
 
-# Define the function to be called when the mouse is clicked
-def mouse_callback(event, x, y, flags, param):
+def mouse_callback(event: int, x: int, y: int, flags, param):
+    """Mouse callback function.
+
+    Args:
+        event: event type 
+        x (int): x coordinate
+        y (int): y coordinate
+    """
     # Check if the left button is clicked and the click position is within the button area
     if event == cv2.EVENT_LBUTTONDOWN and 700 <= x <= 800 and 0 <= y <= 40:
         # print("Button clicked!")
