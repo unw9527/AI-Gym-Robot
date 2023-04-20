@@ -1,2 +1,2 @@
 # ECE445
-EEC445 Senior Design
+EEC445 Senior Design.

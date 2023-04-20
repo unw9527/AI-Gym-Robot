@@ -29,18 +29,18 @@ class BodyPartAngle:
         return calculate_angle(left_hip, left_knee, left_ankle)
 
     def angle_of_the_abdomen(self):
-        # calculate angle of the avg shoulder
+        # Calculate angle of the avg shoulder
         r_shoulder = detection_body_part(self.landmarks, "RIGHT_SHOULDER")
         l_shoulder = detection_body_part(self.landmarks, "LEFT_SHOULDER")
         shoulder_avg = [(r_shoulder[0] + l_shoulder[0]) / 2,
                         (r_shoulder[1] + l_shoulder[1]) / 2]
 
-        # calculate angle of the avg hip
+        # Calculate angle of the avg hip
         r_hip = detection_body_part(self.landmarks, "RIGHT_HIP")
         l_hip = detection_body_part(self.landmarks, "LEFT_HIP")
         hip_avg = [(r_hip[0] + l_hip[0]) / 2, (r_hip[1] + l_hip[1]) / 2]
 
-        # calculate angle of the avg knee
+        # Calculate angle of the avg knee
         r_knee = detection_body_part(self.landmarks, "RIGHT_KNEE")
         l_knee = detection_body_part(self.landmarks, "LEFT_KNEE")
         knee_avg = [(r_knee[0] + l_knee[0]) / 2, (r_knee[1] + l_knee[1]) / 2]
