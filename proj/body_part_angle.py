@@ -30,7 +30,6 @@ class BodyPartAngle:
         
         
     def angle_of_elbow(self):
-        print(self.l_shoulder, self.l_elbow, self.l_wrist, self.r_shoulder, self.r_elbow, self.r_wrist)
         return max(calculate_angle(self.l_shoulder, self.l_elbow, self.l_wrist), calculate_angle(self.r_shoulder, self.r_elbow, self.r_wrist))
     
     def angle_of_shoulder(self):
