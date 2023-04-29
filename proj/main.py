@@ -36,7 +36,7 @@ import mediapipe as mp
 from types_of_exercise import TypeOfExercise
 
 def mouse_callback(event: int, x: int, y: int, flags, param):
-    """Mouse callback function.
+    """Halt the program if the button is clicked.
 
     Args:
         event: event type 
@@ -45,7 +45,6 @@ def mouse_callback(event: int, x: int, y: int, flags, param):
     """
     # Check if the left button is clicked and the click position is within the button area
     if event == cv2.EVENT_LBUTTONDOWN and 700 <= x <= 800 and 0 <= y <= 40:
-        # print("Button clicked!")
         cv2.waitKey(10)
         cap.release()
         cv2.destroyAllWindows()
@@ -54,12 +53,14 @@ def main(mp_drawing, mp_pose, cap):
     # Setup mediapipe
     with mp_pose.Pose(min_detection_confidence=0.5,
                     min_tracking_confidence=0.5) as pose:
-
         counter = 0  # Type of exercise
         status = True  # State of move
-        is_stopped = False  # state of pause
-        while cap.isOpened() and not is_stopped:
-            _, frame = cap.read()
+        
+        while cap.isOpened():
+            success, frame = cap.read()
+            if not success:
+                print("Cannot read the video feed.")
+                break
             
             frame = cv2.resize(frame, (800, 480), interpolation=cv2.INTER_AREA)
             # Recolor frame to RGB
@@ -84,16 +85,25 @@ def main(mp_drawing, mp_pose, cap):
             cv2.rectangle(frame, (700, 0), (800, 40), button_color, -1, cv2.LINE_AA)
             cv2.putText(frame, "Exit", (720, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, button_text_color, 2, cv2.LINE_AA)
 
+
+            # cv2.rectangle(frame, (20, 200), (780, 350), (0, 255, 255), cv2.FILLED)
+            # cv2.putText(frame, "Warning: More than 1 person detected!", (30, 250),
+            #             cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 2, cv2.LINE_AA)
+            # cv2.putText(frame, "Please leave only 1 person in the view", (30, 300),
+            #             cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 2, cv2.LINE_AA)
+                
             # Create white rectangle at top left of image
             cv2.rectangle(frame, (0, 0), (200, 40), (255, 255, 255), cv2.FILLED)
-
             # Add text on top of white rectangle
             cv2.putText(frame, "Activity: " + args["exercise_type"].replace("-", " "),
                         (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2, cv2.LINE_AA)
             
             # Create white rectangle at bottom left of image
-            cv2.rectangle(frame, (0, 350), (80, 480), (255, 255, 255), cv2.FILLED)
-            
+            if counter < 10:
+                cv2.rectangle(frame, (0, 350), (80, 480), (255, 255, 255), cv2.FILLED)
+            else:
+                cv2.rectangle(frame, (0, 350), (160, 480), (255, 255, 255), cv2.FILLED)
+        
             # Add text on top of white rectangle
             cv2.putText(frame, str(counter), (10, 450),
                         cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 3, cv2.LINE_AA)

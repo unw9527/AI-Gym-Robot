@@ -14,7 +14,7 @@ import numpy as np
 
 mp_pose = mp.solutions.pose
 
-def calculate_angle(a: list, b: list, c: list):
+def calculate_angle(a: list, b: list, c: list) -> int:
     """Calculate the angle of the triangle formed by the three points.
     
     Args:
@@ -48,7 +48,7 @@ def calculate_angle(a: list, b: list, c: list):
     return angle
 
 
-def detection_body_parts(landmarks):
+def detection_body_parts(landmarks) -> dict:
     """Detect all body parts from landmarks.
 
     Args:
