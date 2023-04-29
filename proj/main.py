@@ -151,7 +151,6 @@ if __name__ == "__main__":
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
 
-    # Setting the video source
     if args["video_source"] is not None:
         cap = cv2.VideoCapture(args["video_source"])
     else:

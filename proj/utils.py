@@ -37,7 +37,7 @@ def calculate_angle(a: list, b: list, c: list) -> int:
               np.arctan2(a[1] - b[1], a[0] - b[0])
     angle = np.abs(radians * 180.0 / np.pi)
 
-    # Check cord sys area
+    # Calculate complementary angle
     if angle < 0:
         angle += 360
         if angle > 180:
