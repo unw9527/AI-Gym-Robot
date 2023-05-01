@@ -43,17 +43,15 @@ def mouse_callback(event: int, x: int, y: int, flags, param):
         x (int): x coordinate
         y (int): y coordinate
     """
-    # Check if the left button is clicked and the click position is within the button area
     if event == cv2.EVENT_LBUTTONDOWN and 700 <= x <= 800 and 0 <= y <= 40:
         cv2.waitKey(10)
         cap.release()
         cv2.destroyAllWindows()
 
 def main(mp_drawing, mp_pose, cap):
-    # Setup mediapipe
     with mp_pose.Pose(min_detection_confidence=0.5,
                     min_tracking_confidence=0.5) as pose:
-        counter = 0  # Type of exercise
+        counter = 0 
         status = True  # State of move
         
         while cap.isOpened():
@@ -79,7 +77,7 @@ def main(mp_drawing, mp_pose, cap):
             except:
                 pass
             
-            # Draw the stop button
+            # Draw the stop button on the top right of the image
             button_color = (92, 98, 254)
             button_text_color = (0, 0, 0)
             cv2.rectangle(frame, (700, 0), (800, 40), button_color, -1, cv2.LINE_AA)
@@ -92,19 +90,16 @@ def main(mp_drawing, mp_pose, cap):
             # cv2.putText(frame, "Please leave only 1 person in the view", (30, 300),
             #             cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 2, cv2.LINE_AA)
                 
-            # Create white rectangle at top left of image
+            # Top left of image
             cv2.rectangle(frame, (0, 0), (200, 40), (255, 255, 255), cv2.FILLED)
-            # Add text on top of white rectangle
             cv2.putText(frame, "Activity: " + args["exercise_type"].replace("-", " "),
                         (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2, cv2.LINE_AA)
             
-            # Create white rectangle at bottom left of image
+            # Bottom left of image
             if counter < 10:
                 cv2.rectangle(frame, (0, 350), (80, 480), (255, 255, 255), cv2.FILLED)
             else:
                 cv2.rectangle(frame, (0, 350), (160, 480), (255, 255, 255), cv2.FILLED)
-        
-            # Add text on top of white rectangle
             cv2.putText(frame, str(counter), (10, 450),
                         cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 3, cv2.LINE_AA)
 
@@ -122,8 +117,6 @@ def main(mp_drawing, mp_pose, cap):
             )
 
             cv2.imshow('Gym Robot Trainer', frame)
-            
-            # Detect mouse click on the stop button
             cv2.setMouseCallback('Gym Robot Trainer', mouse_callback)
             
             # Press q to exit
@@ -134,7 +127,6 @@ def main(mp_drawing, mp_pose, cap):
         cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    # Setup agrparse
     ap = argparse.ArgumentParser()
     ap.add_argument("-t",
                     "--exercise_type",
