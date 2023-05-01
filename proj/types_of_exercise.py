@@ -11,6 +11,8 @@
 
 from body_part_angle import BodyPartAngle
 from utils import *
+import logging
+import datetime
 
 
 class TypeOfExercise(BodyPartAngle):
@@ -63,11 +65,18 @@ class TypeOfExercise(BodyPartAngle):
         Returns:
             list: [counter, status]
         """
-        knee_angle = self.angle_of_knee()
+        # print(self.l_ankle[1], self.r_ankle[1])
+        # You are not doing squat if one of your feet is up
+        if abs(self.l_ankle[1] - self.r_ankle[1]) > 0.1:
+            return [counter, status]
         
-        if knee_angle > 169:
+        knee_angle = self.angle_of_knee()
+        hip_angle = self.angle_of_hip()
+        # print(knee_angle, hip_angle)
+        
+        if knee_angle > 169 and hip_angle > 160:
             status = False
-        if knee_angle <= 110 and status == False: # the knee angle is fine-tuned
+        if 0 < knee_angle <= 120 and 0 < hip_angle <= 120 and status == False: # the knee angle is fine-tuned
             status = True
             counter += 1
         return [counter, status]
@@ -94,4 +103,4 @@ class TypeOfExercise(BodyPartAngle):
         """
         for joint in self.body_parts:
             if self.body_parts[joint][2] < 0.7:
-                print(f"Cannot see your {joint}!")
+                print(f"Cannot see your {joint}!") # TODO add warning sound
