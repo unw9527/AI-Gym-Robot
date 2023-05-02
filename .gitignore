@@ -11,3 +11,5 @@
 *.bbl
 */videos/*
 *__pycache__
+*/logs/*
+*/screenshots/*

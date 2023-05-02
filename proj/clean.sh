@@ -7,6 +7,5 @@
 
 # Remove log files
 rm -r ./logs
-rm -r ./output_videos
 rm -r ./screenshots
 
