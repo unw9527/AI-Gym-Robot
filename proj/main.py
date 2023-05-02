@@ -51,11 +51,12 @@ def mouse_callback(event: int, x: int, y: int, flags, param):
         cap.release()
         cv2.destroyAllWindows()
 
-def main(mp_drawing, mp_pose, cap):
+def main(mp_drawing, mp_pose, cap, screenshots):
     with mp_pose.Pose(min_detection_confidence=0.5,
                     min_tracking_confidence=0.5) as pose:
         counter = 0 
         status = True  # State of move
+        start_time = datetime.now()
         
         while cap.isOpened():
             success, frame = cap.read()
@@ -75,8 +76,13 @@ def main(mp_drawing, mp_pose, cap):
 
             try:
                 landmarks = results.pose_landmarks.landmark
-                counter, status = TypeOfExercise(landmarks).calculate_exercise(
+                counter, status, msg = TypeOfExercise(landmarks).calculate_exercise(
                     args["exercise_type"], counter, status)
+                if msg:
+                    cv2.rectangle(frame, (50, 50), (750, 150), (0, 255, 255), cv2.FILLED)
+                    cv2.putText(frame, msg, (60, 100),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 2, cv2.LINE_AA)
+                    cv2.imwrite(os.path.join(screenshots, f"{now.strftime('%Y-%m-%d-%H-%M')}.jpg"), frame)
             except:
                 pass
             
@@ -86,13 +92,6 @@ def main(mp_drawing, mp_pose, cap):
             cv2.rectangle(frame, (700, 0), (800, 40), button_color, -1, cv2.LINE_AA)
             cv2.putText(frame, "Exit", (720, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, button_text_color, 2, cv2.LINE_AA)
 
-
-            # cv2.rectangle(frame, (20, 200), (780, 350), (0, 255, 255), cv2.FILLED)
-            # cv2.putText(frame, "Warning: More than 1 person detected!", (30, 250),
-            #             cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 2, cv2.LINE_AA)
-            # cv2.putText(frame, "Please leave only 1 person in the view", (30, 300),
-            #             cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 2, cv2.LINE_AA)
-                
             # Top left of image
             cv2.rectangle(frame, (0, 0), (200, 40), (255, 255, 255), cv2.FILLED)
             cv2.putText(frame, "Activity: " + args["exercise_type"].replace("-", " "),
@@ -127,6 +126,7 @@ def main(mp_drawing, mp_pose, cap):
                 break
         
         logger.info(f"Total number of repetitions: {counter}")
+        logger.info(f"Used time: {datetime.now() - start_time}")
         logger.info("Finish exercising. Thanks for using Gym Robot Trainer!")
         cap.release()
         cv2.destroyAllWindows()
@@ -150,6 +150,10 @@ if __name__ == "__main__":
     if not os.path.exists(log_folder):
         os.makedirs(log_folder)
         
+    screenshots = "screenshots"
+    if not os.path.exists(screenshots):
+        os.makedirs(screenshots)
+        
     now = datetime.now()
     log_file = os.path.join(log_folder, f'feedback-{now.strftime("%Y-%m-%d-%H-%M")}.log')
     logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
@@ -167,8 +171,8 @@ if __name__ == "__main__":
     else:
         cap = cv2.VideoCapture(0)  # webcam
         logger.info("Video source: webcam")
-
+    
     cap.set(3, 800)  # width
     cap.set(4, 480)  # height
     
-    main(mp_drawing, mp_pose, cap)
+    main(mp_drawing, mp_pose, cap, screenshots)
