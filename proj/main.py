@@ -34,6 +34,9 @@ import argparse
 from utils import *
 import mediapipe as mp
 from types_of_exercise import TypeOfExercise
+import logging
+from datetime import datetime
+import os
 
 def mouse_callback(event: int, x: int, y: int, flags, param):
     """Halt the program if the button is clicked.
@@ -57,7 +60,7 @@ def main(mp_drawing, mp_pose, cap):
         while cap.isOpened():
             success, frame = cap.read()
             if not success:
-                print("Cannot read the video feed.")
+                logger.warning("Empty frame")
                 break
             
             frame = cv2.resize(frame, (800, 480), interpolation=cv2.INTER_AREA)
@@ -122,7 +125,9 @@ def main(mp_drawing, mp_pose, cap):
             # Press q to exit
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break
-
+        
+        logger.info(f"Total number of repetitions: {counter}")
+        logger.info("Finish exercising. Thanks for using Gym Robot Trainer!")
         cap.release()
         cv2.destroyAllWindows()
 
@@ -139,14 +144,29 @@ if __name__ == "__main__":
                     help='Source of video',
                     required=False)
     args = vars(ap.parse_args())
+    
+    # Initialize logger
+    log_folder = 'logs'
+    if not os.path.exists(log_folder):
+        os.makedirs(log_folder)
+        
+    now = datetime.now()
+    log_file = os.path.join(log_folder, f'feedback-{now.strftime("%Y-%m-%d-%H-%M")}.log')
+    logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
+    logger = logging.getLogger(__name__)
+    
+    logger.info(f"Starting to do {args['exercise_type']}")
+
     # Drawing body
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
 
     if args["video_source"] is not None:
         cap = cv2.VideoCapture(args["video_source"])
+        logger.info(f"Video source: {args['video_source']}")
     else:
         cap = cv2.VideoCapture(0)  # webcam
+        logger.info("Video source: webcam")
 
     cap.set(3, 800)  # width
     cap.set(4, 480)  # height

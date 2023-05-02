@@ -12,19 +12,19 @@
 from body_part_angle import BodyPartAngle
 from utils import *
 import logging
-import datetime
 
+logger = logging.getLogger(__name__)
 
 class TypeOfExercise(BodyPartAngle):
     def __init__(self, landmarks):
         super().__init__(landmarks)
 
-    def push_up(self, counter: int, status: int) -> list:
+    def push_up(self, counter: int, status: bool) -> list:
         """Check whether a push-up is done and count the number of push-ups
 
         Args:
             counter (int): #push-ups
-            status (int): whether the push-up is finished
+            status (bool): whether the push-up is finished
 
         Returns:
             list: [counter, status]
@@ -45,22 +45,30 @@ class TypeOfExercise(BodyPartAngle):
             return [counter, status]
         
         if per == 0:
-            if 10 < elbow_angle <= 90 and 10 < shoulder_angle <= 40 and hip_angle > 150:
-                if not status:
+            if not status:
+                if 10 < elbow_angle <= 90 and 10 < shoulder_angle <= 40 and hip_angle > 150:
                     counter += 1
+                    logger.info(f"Push-up {counter} done")
                     status = True
+                else:
+                    if elbow_angle > 90 and 10 < shoulder_angle <= 40 and hip_angle > 150:
+                        logger.warning(f"Push-up {counter + 1}: Your elbow angle is too large")
+                    if 10 < elbow_angle <= 90 and shoulder_angle > 40 and hip_angle > 150:
+                        logger.warning(f"Push-up {counter + 1}: Your shoulder angle is too large")
+                    if 10 < elbow_angle <= 90 and 10 < shoulder_angle <= 40 and hip_angle <= 150:
+                        logger.warning(f"Push-up {counter + 1}: Your hip angle is too small")
         else:
             if elbow_angle > 90 and shoulder_angle > 40 and hip_angle > 150:
                 if status:
                     status = False
         return [counter, status]
 
-    def squat(self, counter: int, status: int) -> list:
+    def squat(self, counter: int, status: bool) -> list:
         """Check whether a squat is done and count the number of squats
 
         Args:
             counter (int): #squats
-            status (int): whether the squat is finished
+            status (bool): whether the squat is finished
 
         Returns:
             list: [counter, status]
@@ -81,13 +89,13 @@ class TypeOfExercise(BodyPartAngle):
             counter += 1
         return [counter, status]
 
-    def calculate_exercise(self, exercise_type: str, counter: int, status: int) -> list:
+    def calculate_exercise(self, exercise_type: str, counter: int, status: bool) -> list:
         """Call the corresponding function for the exercise type specified in args
 
         Args:
             exercise_type (str): "push-up" or "squat"
             counter (int): #push-up/squat done
-            status (int): whether the push-up/squat is finished
+            status (bool): whether the push-up/squat is finished
 
         Returns:
             list: [counter, status]
@@ -101,6 +109,7 @@ class TypeOfExercise(BodyPartAngle):
     def check_body_position(self):
         """Check whether all body parts can be seen
         """
-        for joint in self.body_parts:
-            if self.body_parts[joint][2] < 0.7:
-                print(f"Cannot see your {joint}!") # TODO add warning sound
+        # for joint in self.body_parts:
+        #     if self.body_parts[joint][2] < 0.7:
+        #         print(f"Cannot see your {joint}!") # TODO add warning sound
+        pass
