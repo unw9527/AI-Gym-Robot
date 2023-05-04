@@ -1,5 +1,7 @@
 import tkinter as tk
 import subprocess
+import webbrowser
+from generate_report import *
 
 class ExerciseCounterGUI(tk.Frame):
     def __init__(self, master=None):
@@ -23,24 +25,31 @@ class ExerciseCounterGUI(tk.Frame):
                borderwidth=2, relief="groove")
         self.object_tracking_button.pack(pady=10)
 
-        self.squat_button = tk.Button(self, text="Count Squat", command=self.run_program_1,width=60, height=12, font=("Helvetica", 24), 
+        self.squat_button = tk.Button(self, text="Count Squat", command=self.run_program_1,width=60, height=5, font=("Helvetica", 24), 
                foreground="black", bg="#4CAF50", 
                borderwidth=2, relief="groove")
         self.squat_button.pack_forget()
 
-        self.push_up_button = tk.Button(self, text="Count Push-Up", command=self.run_program_2,width=60, height=12, font=("Helvetica", 24), 
+        self.push_up_button = tk.Button(self, text="Count Push-Up", command=self.run_program_2,width=60, height=5, font=("Helvetica", 24), 
                foreground="black", bg="#F44336", 
                borderwidth=2, relief="groove")
         self.push_up_button.pack_forget()
 
-        self.back_button = tk.Button(self, text="Back", command=self.hide_buttons, width=60, height=6, font=("Helvetica", 24), 
+        self.back_button = tk.Button(self, text="Back", command=self.hide_buttons, width=60, height=5, font=("Helvetica", 24), 
                foreground="red", bg="#555555", 
                borderwidth=2, relief="groove")
         self.back_button.pack_forget()
+        
+        self.html_button = tk.Button(self, text="Open Local HTML", command=self.open_local_html, width=60, height=5, font=("Helvetica", 24),
+               foreground="black", bg="#9C27B0",
+               borderwidth=2, relief="groove")
+        self.html_button.pack_forget()
+        
 
     def show_buttons(self):
         self.squat_button.pack(pady=10)
         self.push_up_button.pack(pady=10)
+        self.html_button.pack(pady=10)  # show the new button
         self.object_tracking_button.pack_forget()  # hide the object tracking button
         self.start_button.pack_forget()
         self.back_button.pack(pady=10)
@@ -48,10 +57,19 @@ class ExerciseCounterGUI(tk.Frame):
     def hide_buttons(self):
         self.squat_button.pack_forget()
         self.push_up_button.pack_forget()
+        self.html_button.pack_forget()  # hide the new button
         self.object_tracking_button.pack_forget()  # hide the object tracking button
         self.back_button.pack_forget()
         self.start_button.pack(pady=10)
         self.object_tracking_button.pack(pady=10)  # show the object tracking button
+
+    def open_local_html(self):
+        # generate_html()
+        generate_html_random()
+        web_try = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/try.html"
+        web_generate = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/generated.html"
+        web_generate_random = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/generated_random.html"
+        webbrowser.open_new_tab('file://' + web_generate_random)
 
     def run_program_1(self):
         subprocess.run(["python", "main.py", '-t', 'squat'])
@@ -66,7 +84,6 @@ class ExerciseCounterGUI(tk.Frame):
 root = tk.Tk()
 app = ExerciseCounterGUI(master=root)
 app.mainloop()
-
 
 # import tkinter as tk
 # import tkinter.ttk as ttk

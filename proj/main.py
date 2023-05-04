@@ -155,7 +155,7 @@ if __name__ == "__main__":
         os.makedirs(screenshots)
         
     now = datetime.now()
-    log_file = os.path.join(log_folder, f'feedback-{now.strftime("%Y-%m-%d-%H-%M-%S")}.log')
+    log_file = os.path.join(log_folder, f'feedback.log')
     logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
     
