@@ -82,7 +82,7 @@ def main(mp_drawing, mp_pose, cap, screenshots):
                     cv2.rectangle(frame, (50, 50), (750, 150), (0, 255, 255), cv2.FILLED)
                     cv2.putText(frame, msg, (60, 100),
                             cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 2, cv2.LINE_AA)
-                    cv2.imwrite(os.path.join(screenshots, f"{now.strftime('%Y-%m-%d-%H-%M-%S')}.jpg"), frame)
+                    cv2.imwrite(os.path.join(screenshots, f"{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}.jpg"), frame)
             except:
                 pass
             
