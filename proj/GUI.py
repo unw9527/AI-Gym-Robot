@@ -40,7 +40,7 @@ class ExerciseCounterGUI(tk.Frame):
                borderwidth=2, relief="groove")
         self.back_button.pack_forget()
         
-        self.html_button = tk.Button(self, text="Open Local HTML", command=self.open_local_html, width=60, height=5, font=("Helvetica", 24),
+        self.html_button = tk.Button(self, text="Generate Report", command=self.open_local_html, width=60, height=5, font=("Helvetica", 24),
                foreground="black", bg="#9C27B0",
                borderwidth=2, relief="groove")
         self.html_button.pack_forget()
