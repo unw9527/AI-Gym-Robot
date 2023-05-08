@@ -51,13 +51,13 @@ class TypeOfExercise(BodyPartAngle):
                     logger.info(f"Push-up {counter} done")
                     status = True
                 else:
-                    if elbow_angle > 90 and 10 < shoulder_angle <= 40 and hip_angle > 150:
+                    if elbow_angle > 100 and 10 < shoulder_angle <= 40 and hip_angle > 140:
                         logger.warning(f"Push-up {counter + 1}: Your elbow angle is too large")
                         msg += "Elbow angle too large. "
-                    if 10 < elbow_angle <= 90 and shoulder_angle > 40 and hip_angle > 150:
+                    if 10 < elbow_angle <= 100 and shoulder_angle > 40 and hip_angle > 140:
                         logger.warning(f"Push-up {counter + 1}: Your shoulder angle is too large")
                         msg += "Shoulder angle too large. "
-                    if 10 < elbow_angle <= 90 and 10 < shoulder_angle <= 40 and hip_angle <= 150:
+                    if 10 < elbow_angle <= 100 and 10 < shoulder_angle <= 40 and hip_angle <= 140:
                         logger.warning(f"Push-up {counter + 1}: Your hip angle is too small")
                         msg += "Hip angle is too small. "
         elif elbow_angle > 90 and shoulder_angle > 40 and hip_angle > 150 and status:
@@ -93,6 +93,7 @@ class TypeOfExercise(BodyPartAngle):
                 msg += "Hip angle too large. "
             if 0 < knee_angle <= 120 and 0 < hip_angle <= 120: # the knee angle is fine-tuned
                 status = True
+                logger.info(f"Squat {counter + 1} done")
                 counter += 1
         return [counter, status, msg]
 
