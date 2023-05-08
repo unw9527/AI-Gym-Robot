@@ -37,6 +37,7 @@ from types_of_exercise import TypeOfExercise
 import logging
 from datetime import datetime
 import os
+import shutil
 
 def mouse_callback(event: int, x: int, y: int, flags, param):
     """Halt the program if the button is clicked.
@@ -147,10 +148,14 @@ if __name__ == "__main__":
     
     # Initialize logger
     log_folder = 'logs'
+    if os.path.exists(log_folder) and os.path.isdir(log_folder):
+        shutil.rmtree(log_folder)
     if not os.path.exists(log_folder):
         os.makedirs(log_folder)
         
     screenshots = "screenshots"
+    if os.path.exists(screenshots) and os.path.isdir(screenshots):
+        shutil.rmtree(screenshots)
     if not os.path.exists(screenshots):
         os.makedirs(screenshots)
         
