@@ -93,24 +93,31 @@ def generate_html_random():
     # image_src = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/imgs/covid.jpg"
     image_alt = "Example image"
     image_width = "500"
+    images = ""
     # Define the directory containing the images
     image_directory = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/screenshots"
     # List all files in the directory
     all_files = os.listdir(image_directory)
-    # Filter the list to include only image files (assuming they have .jpg, .jpeg, .png, or .gif extensions)
-    image_extensions = [".jpg", ".jpeg", ".png", ".gif"]
-    image_files = [file for file in all_files if any(file.endswith(ext) for ext in image_extensions)]
+    
+    if(len(all_files)==0):
+        paragraph_text = "All your moves are perfect! Nice!"
+    else:
+        # Filter the list to include only image files (assuming they have .jpg, .jpeg, .png, or .gif extensions)
+        image_extensions = [".jpg", ".jpeg", ".png", ".gif"]
+        image_files = [file for file in all_files if any(file.endswith(ext) for ext in image_extensions)]
 
-    num_images = random.randint(3, 4)
-    # Randomly pick an image file
-    # random_image = random.choice(image_files,num_images)
-    random_image = random.sample(image_files,num_images)
-    # Create the image elements in a loop
-    images = ""
-    for i in range(num_images):
-        image_src = os.path.join(image_directory, random_image[i])
-        # print("current image source: ",image_src,"\n")
-        images += f'<img src="{image_src}" alt="{image_alt} {i+1}" width="{image_width}">\n'
+        upper = min(6,len(all_files))
+        lower = int(len(all_files)/2)
+        num_images = random.randint(lower, upper)
+        # Randomly pick an image file
+        # random_image = random.choice(image_files,num_images)
+        random_image = random.sample(image_files,num_images)
+        # Create the image elements in a loop
+        
+        for i in range(num_images):
+            image_src = os.path.join(image_directory, random_image[i])
+            # print("current image source: ",image_src,"\n")
+            images += f'<img src="{image_src}" alt="{image_alt} {i+1}" width="{image_width}">\n'
 
      # Insert the content into the HTML template
     html_content = html_template.format(
