@@ -63,8 +63,8 @@ def generate_html_random():
         for line in log_lines:
             if "Starting to do push-up" in line:
                 start_time = datetime.strptime(line.split(" ")[0] + " " + line.split(" ")[1], "%Y-%m-%d %H:%M:%S,%f")
-            elif "Finish exercising" in line:
-                end_time = datetime.strptime(line.split(" ")[0] + " " + line.split(" ")[1], "%Y-%m-%d %H:%M:%S,%f")
+            # elif "Finish exercising" in line:
+            #     end_time = datetime.strptime(line.split(" ")[0] + " " + line.split(" ")[1], "%Y-%m-%d %H:%M:%S,%f")
             elif "Push-up" in line and "done" in line:
                 total_counts += 1
             elif "WARNING" in line:
@@ -75,15 +75,17 @@ def generate_html_random():
         for line in log_lines:
             if "Starting to do squat" in line:
                 start_time = datetime.strptime(line.split(" ")[0] + " " + line.split(" ")[1], "%Y-%m-%d %H:%M:%S,%f")
-            elif "Finish exercising" in line:
-                end_time = datetime.strptime(line.split(" ")[0] + " " + line.split(" ")[1], "%Y-%m-%d %H:%M:%S,%f")
+            # elif "Finish exercising" in line:
+            #     end_time = datetime.strptime(line.split(" ")[0] + " " + line.split(" ")[1], "%Y-%m-%d %H:%M:%S,%f")
             elif "Squat" in line and "done" in line:
                 total_counts += 1
             elif "WARNING" in line:
                 push_up_number = int(re.search(r"Squat (\d+)", line).group(1))
                 if push_up_number not in problematic_moves:
                     problematic_moves.append(push_up_number)
-
+    last_line = log_lines[-1]
+    # print(last_line)
+    end_time = datetime.strptime(last_line.split(" ")[0] + " " + last_line.split(" ")[1], "%Y-%m-%d %H:%M:%S,%f")
     problematic_move_str = ', '.join(map(str, problematic_moves))
     used_time = end_time - start_time
     
