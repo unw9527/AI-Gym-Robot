@@ -81,6 +81,7 @@ class ExerciseCounterGUI(tk.Frame):
         # Add code here to run your object tracking function
         pass
 
+
 root = tk.Tk()
 app = ExerciseCounterGUI(master=root)
 app.mainloop()
