@@ -99,19 +99,23 @@ def generate_html_random():
     # List all files in the directory
     all_files = os.listdir(image_directory)
     
-    if(len(all_files)==0):
+    if(len(all_files)<=2):
+        #exclude the last image
         paragraph_text = "All your moves are perfect! Nice!"
     else:
         # Filter the list to include only image files (assuming they have .jpg, .jpeg, .png, or .gif extensions)
         image_extensions = [".jpg", ".jpeg", ".png", ".gif"]
         image_files = [file for file in all_files if any(file.endswith(ext) for ext in image_extensions)]
-
-        upper = min(6,len(all_files))
-        lower = int(len(all_files)/2)
+        image_files_except_last = image_files[:-1]
+        
+        upper = min(6,len(all_files)-2)
+        # print(len(all_files))
+        lower = int(max(1,len(all_files)/2-1))
         num_images = random.randint(lower, upper)
+        # print(upper,lower,num_images)
         # Randomly pick an image file
         # random_image = random.choice(image_files,num_images)
-        random_image = random.sample(image_files,num_images)
+        random_image = random.sample(image_files_except_last,num_images)
         # Create the image elements in a loop
         
         for i in range(num_images):
