@@ -44,7 +44,7 @@ class TypeOfExercise(BodyPartAngle):
         if self.l_hip[1] - self.l_shoulder[1] > 0.1:
             return [counter, status, msg]
         
-        if per == 0:
+        if per < 30:
             if not status:
                 if 10 < elbow_angle <= 90 and 10 < shoulder_angle <= 40 and hip_angle > 150:
                     counter += 1
