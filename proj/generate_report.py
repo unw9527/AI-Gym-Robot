@@ -26,7 +26,7 @@ def generate_html_random():
     <body>
         <h1>{header_text}</h1>
         <p>Exercise Type: {exercise_display}</p>
-        <p>There are problems with the {problematic_move_str}th {exercise_display}.</p>
+        <p>{Comment} {problematic_move_str} {comment_type}</p>
         <p>Total {exercise_display} done: {total_counts}</p>
         <p>Total used time: {used_time}</p>
                 
@@ -51,8 +51,10 @@ def generate_html_random():
     exercise_type = ("push-up" in first_line) 
     if(exercise_type==1):
         exercise_display = "Push-Up"
+        comment_type= "Push-Up"
     else:
         exercise_display = "Squat"
+        comment_type= "Squat"
      
     problematic_moves = []
     total_counts = 0
@@ -99,6 +101,13 @@ def generate_html_random():
     # List all files in the directory
     all_files = os.listdir(image_directory)
     
+    Comment = ""
+    if(len(problematic_moves)<=1):
+        Comment = "Your movements are all standard!"
+        comment_type= ""
+    else:
+        Comment = "There are problems with the "
+        
     if(len(all_files)<=2):
         #exclude the last image
         paragraph_text = "All your moves are perfect! Nice!"
@@ -131,7 +140,9 @@ def generate_html_random():
         problematic_move_str = problematic_move_str,
         used_time = used_time,
         total_counts = total_counts,
-        exercise_display=exercise_display
+        exercise_display=exercise_display,
+        Comment=Comment,
+        comment_type = comment_type
     )
     # Save the generated HTML content to a file
     with open("website/generated_random.html", "w") as file:
