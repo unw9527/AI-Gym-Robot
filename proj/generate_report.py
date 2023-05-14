@@ -88,6 +88,8 @@ def generate_html_random():
     last_line = log_lines[-1]
     # print(last_line)
     end_time = datetime.strptime(last_line.split(" ")[0] + " " + last_line.split(" ")[1], "%Y-%m-%d %H:%M:%S,%f")
+    if(len(problematic_moves)>=1):
+        problematic_moves = problematic_moves[:-1]
     problematic_move_str = ', '.join(map(str, problematic_moves))
     used_time = end_time - start_time
     
@@ -102,7 +104,7 @@ def generate_html_random():
     all_files = os.listdir(image_directory)
     
     Comment = ""
-    if(len(problematic_moves)<=1):
+    if(len(problematic_moves)==0):
         Comment = "Your movements are all standard!"
         comment_type= ""
     else:
