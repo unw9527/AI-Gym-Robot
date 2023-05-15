@@ -40,16 +40,22 @@ class ExerciseCounterGUI(tk.Frame):
                borderwidth=2, relief="groove")
         self.back_button.pack_forget()
         
-        self.html_button = tk.Button(self, text="Generate Report", command=self.open_local_html, width=60, height=5, font=("Helvetica", 24),
+        self.html_button = tk.Button(self, text="Generate Report", command=lambda: self.open_local_html(0), width=60, height=5, font=("Helvetica", 24),
                foreground="black", bg="#9C27B0",
                borderwidth=2, relief="groove")
         self.html_button.pack_forget()
+        
+        self.html_his_button = tk.Button(self, text="History Report", command=lambda: self.open_local_html(1), width=60, height=5, font=("Helvetica", 24),
+               foreground="black", bg="#9C27B0",
+               borderwidth=2, relief="groove")
+        self.html_his_button.pack_forget()
         
 
     def show_buttons(self):
         self.squat_button.pack(pady=10)
         self.push_up_button.pack(pady=10)
         self.html_button.pack(pady=10)  # show the new button
+        self.html_his_button.pack(pady=10)
         self.object_tracking_button.pack_forget()  # hide the object tracking button
         self.start_button.pack_forget()
         self.back_button.pack(pady=10)
@@ -58,19 +64,22 @@ class ExerciseCounterGUI(tk.Frame):
         self.squat_button.pack_forget()
         self.push_up_button.pack_forget()
         self.html_button.pack_forget()  # hide the new button
+        self.html_his_button.pack_forget()
         self.object_tracking_button.pack_forget()  # hide the object tracking button
         self.back_button.pack_forget()
         self.start_button.pack(pady=10)
         self.object_tracking_button.pack(pady=10)  # show the object tracking button
 
-    def open_local_html(self):
-        # generate_html()
-        generate_html_random()
-        web_try = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/try.html"
-        web_generate = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/generated.html"
+    def open_local_html(self, version):
+        print("wtfwtfwtf")
+        generate_html_random(version)
         web_generate_random = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/generated_random.html"
-        webbrowser.open_new_tab('file://' + web_generate_random)
-
+        web_history = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/history_report.html"
+        if(version==0):
+            webbrowser.open_new_tab('file://' + web_generate_random)
+        else:
+            webbrowser.open_new_tab('file://' + web_history)
+            
     def run_program_1(self):
         subprocess.run(["python", "main.py", '-t', 'squat'])
 

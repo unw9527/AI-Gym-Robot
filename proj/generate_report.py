@@ -1,4 +1,4 @@
-def generate_html_random():
+def generate_html_random(version):
     import random 
     import os
     import re
@@ -43,7 +43,11 @@ def generate_html_random():
 
     # Generate a random number of images between 1 and 10
     # Parse the log file and extract the necessary information
-    log_file_path = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/logs/feedback.log"
+    if(version):
+        log_file_path = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/logs_history/feedback.log"
+    else:
+        log_file_path = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/logs/feedback.log"
+        
     with open(log_file_path, "r") as file:
         log_lines = file.readlines()
         
@@ -99,7 +103,10 @@ def generate_html_random():
     image_width = "500"
     images = ""
     # Define the directory containing the images
-    image_directory = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/screenshots"
+    if(version):
+        image_directory = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/screenshots_history"
+    else:    
+        image_directory = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/screenshots"
     # List all files in the directory
     all_files = os.listdir(image_directory)
     
@@ -147,5 +154,9 @@ def generate_html_random():
         comment_type = comment_type
     )
     # Save the generated HTML content to a file
-    with open("website/generated_random.html", "w") as file:
-        file.write(html_content)
+    if(version):
+        with open("website/history_report.html", "w") as file:
+            file.write(html_content)
+    else:
+        with open("website/generated_random.html", "w") as file:
+            file.write(html_content)
