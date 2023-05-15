@@ -126,11 +126,11 @@ def generate_html_random(version):
         image_files = [file for file in all_files if any(file.endswith(ext) for ext in image_extensions)]
         image_files_except_last = image_files[:-1]
         
-        upper = min(6,len(all_files)-2)
-        # print(len(all_files))
-        lower = int(max(1,len(all_files)/2-1))
-        num_images = random.randint(lower, upper)
-        # print(upper,lower,num_images)
+        # upper = min(6,len(all_files)-2)
+        # lower = int(max(1,len(all_files)/2-1))
+        # num_images = random.randint(lower, upper)
+        num_images = len(all_files)-2
+        
         # Randomly pick an image file
         # random_image = random.choice(image_files,num_images)
         random_image = random.sample(image_files_except_last,num_images)
