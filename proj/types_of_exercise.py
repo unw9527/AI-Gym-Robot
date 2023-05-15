@@ -41,23 +41,24 @@ class TypeOfExercise(BodyPartAngle):
         # print(self.l_shoulder[1], self.l_hip[1], self.l_knee[1], self.l_ankle[1])
         
         # You cannot do push-up while standing up
-        if self.l_hip[1] - self.l_shoulder[1] > 0.1:
+        if self.l_hip[1] - self.l_shoulder[1] > 0.2:
+            # print(self.l_hip[1] - self.l_shoulder[1])
             return [counter, status, msg]
         
         if per < 30:
             if not status:
-                if 10 < elbow_angle <= 90 and 10 < shoulder_angle <= 40 and hip_angle > 150:
+                if 10 < elbow_angle <= 90 and 10 < shoulder_angle <= 45 and hip_angle > 150:
                     counter += 1
                     logger.info(f"Push-up {counter} done")
                     status = True
                 else:
-                    if elbow_angle > 100 and 10 < shoulder_angle <= 40 and hip_angle > 140:
+                    if elbow_angle > 100 and 10 < shoulder_angle <= 45 and hip_angle > 140:
                         logger.warning(f"Push-up {counter + 1}: Your elbow angle is too large")
                         msg += "Elbow angle too large. "
-                    if 10 < elbow_angle <= 100 and shoulder_angle > 40 and hip_angle > 140:
+                    if 10 < elbow_angle <= 100 and shoulder_angle > 45 and hip_angle > 140:
                         logger.warning(f"Push-up {counter + 1}: Your shoulder angle is too large")
                         msg += "Shoulder angle too large. "
-                    if 10 < elbow_angle <= 100 and 10 < shoulder_angle <= 40 and hip_angle <= 140:
+                    if 10 < elbow_angle <= 100 and 10 < shoulder_angle <= 45 and hip_angle <= 140:
                         logger.warning(f"Push-up {counter + 1}: Your hip angle is too small")
                         msg += "Hip angle is too small. "
         elif elbow_angle > 90 and shoulder_angle > 40 and hip_angle > 150 and status:
