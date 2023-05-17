@@ -2,14 +2,15 @@
 #
 # tab:4
 #
-# types_of_exercise.py: define the counting rules for each exercise
+# exercises.py: define the counting rules for each exercise
 # 
 # Author:          Kunle Li
 # Creation Date:   2023-03-29
+# Last Update:     2023-05-17
 #
 #################################################################################
 
-from body_part_angle import BodyPartAngle
+from angles import BodyPartAngle
 from utils import *
 import logging
 
@@ -61,7 +62,7 @@ class TypeOfExercise(BodyPartAngle):
                     if 10 < elbow_angle <= 100 and 10 < shoulder_angle <= 45 and hip_angle <= 140:
                         logger.warning(f"Push-up {counter + 1}: Your hip angle is too small")
                         msg += "Hip angle is too small. "
-        elif elbow_angle > 90 and shoulder_angle > 40 and hip_angle > 150 and status:
+        elif elbow_angle > 90 and shoulder_angle > 45 and hip_angle > 150 and status:
             status = False
         return [counter, status, msg]
 
