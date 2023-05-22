@@ -9,7 +9,7 @@
 *.bcf
 *.blg
 *.bbl
-*/videos/*
+*videos/*
 *__pycache__
 */logs/*
 */screenshots/*
