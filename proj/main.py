@@ -25,6 +25,7 @@
 #
 # Author:          Kunle Li
 # Creation Date:   2023-03-29
+# Last Update:     2023-05-17
 # Credits:         https://github.com/M-A-D-A-R-A/Sports_py
 #
 #################################################################################
@@ -33,7 +34,7 @@ import cv2
 import argparse
 from utils import *
 import mediapipe as mp
-from types_of_exercise import TypeOfExercise
+from exercises import TypeOfExercise
 import logging
 from datetime import datetime
 import os
