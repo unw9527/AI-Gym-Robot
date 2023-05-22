@@ -73,8 +73,8 @@ class ExerciseCounterGUI(tk.Frame):
     def open_local_html(self, version):
         print("wtfwtfwtf")
         generate_html_random(version)
-        web_generate_random = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/generated_random.html"
-        web_history = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/history_report.html"
+        web_generate_random = "website/generated_random.html"
+        web_history = "website/history_report.html"
         if(version==0):
             webbrowser.open_new_tab('file://' + web_generate_random)
         else:

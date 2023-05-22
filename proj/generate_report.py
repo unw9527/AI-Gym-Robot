@@ -44,9 +44,9 @@ def generate_html_random(version):
     # Generate a random number of images between 1 and 10
     # Parse the log file and extract the necessary information
     if(version):
-        log_file_path = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/logs_history/feedback.log"
+        log_file_path = "logs_history/feedback.log"
     else:
-        log_file_path = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/logs/feedback.log"
+        log_file_path = "logs/feedback.log"
         
     with open(log_file_path, "r") as file:
         log_lines = file.readlines()
@@ -98,15 +98,14 @@ def generate_html_random(version):
     used_time = end_time - start_time
     
     # Set the image source, alt text, and width
-    # image_src = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/website/imgs/covid.jpg"
     image_alt = "Example image"
     image_width = "500"
     images = ""
     # Define the directory containing the images
     if(version):
-        image_directory = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/screenshots_history"
+        image_directory = "screenshots_history"
     else:    
-        image_directory = "/Users/liuchang/Desktop/Spring2023/ECE445/git_repo/proj/screenshots"
+        image_directory = "screenshots"
     # List all files in the directory
     all_files = os.listdir(image_directory)
     
