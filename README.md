@@ -27,6 +27,8 @@ We can count various forms of push-ups:)
 
 ![](images/counter.gif)
 
+(The input video file is trimmed from YouTube.)
+
 ### Feedback generation
 The program will generate a report containing the feedback. An example shown as below:
 <img src="images/feedback.png" alt="Feedback Screenshot" width="50%">
