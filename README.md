@@ -24,9 +24,10 @@ Alternatively, if you want to run the program on a local video file instead of u
 ## Examples
 ### Movement counting
 We can count various forms of push-ups:)
+
 ![](images/counter.gif)
 
 ### Feedback generation
 The program will generate a report containing the feedback. An example shown as below:
-![](images/feedback.png)
+<img src="images/feedback.png" alt="Feedback Screenshot" width="50%">
 
