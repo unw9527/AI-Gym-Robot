@@ -19,7 +19,7 @@ This project tends to develop a robot to provide exercise guidance in a gym sett
 ## How to run
 Install the required packages in `requirements.txt` via `pip`. Then run with `python main.py -t <exercise-type>`, where the exercise type is either "squat" or "push-up".
 
-Alternatively, if you want to run the program on a local video file instead of using your camera, add another flag `-vs` with the path to your video file (i.e. `python main.py -t <exercise-type> -vs <path-to-your-video-file>`.
+Alternatively, if you want to run the program on a local video file instead of using your camera, add another flag `-vs` with the path to your video file (i.e. `python main.py -t <exercise-type> -vs <path-to-your-video-file>`).
 
 ## Examples
 ### Movement counting
